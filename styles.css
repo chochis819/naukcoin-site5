@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: black;
+    color: yellow;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    padding: 50px 20px;
+    background-color: black;
+}
+
+header h1 {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+header p {
+    font-size: 18px;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+header a, header button {
+    background-color: yellow;
+    color: black;
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+header button:disabled {
+    background-color: grey;
+}
+
+section {
+    padding: 40px 20px;
+}
+
+section h2, section h3 {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+section a {
+    color: yellow;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 20px;
+}
