@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Comprar NAUKCoin</title>
+  <script src="https://cdn.jsdelivr.net/npm/web3@1.10.0/dist/web3.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 100px; }
+    button, input { padding: 10px 20px; font-size: 16px; margin: 10px; }
+  </style>
+</head>
+<body>
+
+  <h1>Compra NAUKCoin</h1>
+  <p>1 BNB = 10,000 NAUK</p>
+
+  <button onclick="connectWallet()">🔗 Conectar Wallet</button><br>
+
+  <input id="amount" type="number" placeholder="Cantidad en BNB" min="0.001" step="0.001" />
+  <br>
+  <button onclick="buyToken()">💰 Comprar NAUK</button>
+
+  <script>
+    let web3;
+    let account;
+    const receiverAddress = "0xTuWalletAquí"; // ← pon aquí tu dirección para recibir BNB
+
+    async function connectWallet() {
+      if (window.ethereum) {
+        web3 = new Web3(window.ethereum);
+        try {
+          await window.ethereum.request({ method: 'eth_requestAccounts' });
+          const accounts = await web3.eth.getAccounts();
+          account = accounts[0];
+          alert("Wallet conectada: " + account);
+        } catch (err) {
+          console.error("Error al conectar:", err);
+        }
+      } else {
+        alert("MetaMask no está instalado.");
+      }
+    }
+
+    async function buyToken() {
+      const amountBNB = document.getElementById("amount").value;
+      if (!amountBNB || amountBNB <= 0) {
+        alert("Por favor ingresa una cantidad válida.");
+        return;
+      }
+
+      const amountInWei = web3.utils.toWei(amountBNB, 'ether');
+
+      try {
+        await web3.eth.sendTransaction({
+          from: account,
+          to: receiverAddress,
+          value: amountInWei
+        });
+        alert("¡Compra realizada! Te enviaremos tus NAUK pronto.");
+      } catch (err) {
+        console.error("Error al enviar transacción:", err);
+        alert("Error al enviar BNB.");
+      }
+    }
+  </script>
+
+</body>
+</html>
